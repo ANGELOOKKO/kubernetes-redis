@@ -32,14 +32,7 @@ Esegui il seguente comando nel tuo PowerShell con privilegi elevati (Esegui come
 ```powershell
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
 
-## Verifica dell'installazione
 
-Per verificare che Chocolatey, Minikube e Kubernetes siano stati installati correttamente, esegui i seguenti comandi:
-
-### Verifica l'installazione di Chocolatey
-
-```bash
-choco --version
 
 
 

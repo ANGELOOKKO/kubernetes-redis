@@ -83,7 +83,7 @@ Minikube è uno strumento che consente di eseguire un cluster Kubernetes locale 
 - Testing e debugging: Minikube facilita il testing e il debugging delle applicazioni Kubernetes in un ambiente isolato e controllato, prima di distribuirle su 
   cluster Kubernetes più grandi.
 
-### Installazione
+#### Installazione
 ```powershell
 choco install minikube
 ```
@@ -92,7 +92,65 @@ choco install minikube
 minikube verion
 ```
 
-## Deploy del cluster e trattazioni 
+## Redis Master  e Slave and failover 
+
+
+## Deploy del cluster 
+**Avviare il nodo di Minikube:**
+```bash
+minikube start -p redis-cluster 
+```
+ **Verificare lo stato di Minikube:**
+ ```bash
+minikube status - p redis-cluster
+``` 
+**Creare un namespace:**
+```bash
+kubectl create ns redis-ns
+``` 
+**In seguito  per l'applicazione in seguito dei manifesti settiamo il namespace creato** 
+```bash
+kubectl config set-context --current --namespace=redis-ns
+```
+#### configmap.yaml 
+- apiVersion: v1 definisce un oggetto ConfigMap in Kubernetes che contiene la configurazione di un'istanza di Redis tramite il file redis.conf. Ecco una spiegazione 
+  del codice:
+- apiVersion e kind: Specificano il tipo di risorsa Kubernetes (ConfigMap nel nostro caso). apiVersion: v1 indica che stiamo utilizzando la versione stabile API v1 
+  di Kubernetes.
+- metadata: Contiene metadati che descrivono il ConfigMap.
+- name: redis-config: Specifica il nome del ConfigMap, che è redis-config.
+- namespace: redis-ns: Indica il namespace in cui è definito il ConfigMap, che è redis-ns. I namespace in Kubernetes sono usati per organizzare e raggruppare risorse.
+  data: Contiene i dati effettivi del ConfigMap, rappresentati come una mappa di coppie chiave-valore.
+
+- redis.conf: È il nome del file all'interno del ConfigMap che conterrà la configurazione di Redis.
+- redis.conf: È il contenuto del file di configurazione Redis. Le configurazioni incluse sono:
+
+- cluster-enabled no: Indica che Redis non è configurato in modalità cluster.
+
+- cluster-config-file nodes.conf: Specifica il file in cui vengono salvate le informazioni sui nodi nel caso di configurazione cluster.
+
+- cluster-node-timeout 15000: Imposta il timeout per i nodi del cluster a 15 secondi.
+
+- bind 0.0.0.0: Redis si lega a tutte le interfacce di rete disponibili.
+
+- port 6379: Specifica la porta su cui Redis è in ascolto (default è 6379).
+
+#### Persistenza dei dati:
+
+- dir /data: Indica la directory in cui vengono memorizzati i dati persistenti.
+- dbfilename dump.rdb: Nome del file per il dump del database.
+- appendonly yes: Abilita il file di append-only (appendonly.aof) per garantire la persistenza dei dati.
+- appendfilename "appendonly.aof": Specifica il nome del file di append-only.
+#### Autenticazione:
+- masterauth dHJlbjc5Cg==: Specifica la password codificata in Base64 per l'autenticazione del master. La stringa "dHJlbjc5Cg==" corrisponde alla password 
+  decodificata.
+- requirepass dHJlbjc5Cg==: Specifica la password codificata in Base64 necessaria per accedere agli altri comandi di Redis.
+
+
+
+## Test 
+
+## Consderazioni 
 
 
 

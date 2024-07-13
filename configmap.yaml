@@ -18,5 +18,5 @@ data:
     appendfilename "appendonly.aof"
 
     # Autenticazione
-    masterauth dHJlbjc5Cg==
-    requirepass dHJlbjc5Cg==
+    masterauth *********
+    requirepass *********

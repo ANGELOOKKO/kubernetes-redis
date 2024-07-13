@@ -152,7 +152,7 @@ All'interno della sezione data, viene definito il contenuto del file redis.conf.
 
 Per la persistenza dei dati, il parametro dir /data indica la directory in cui vengono memorizzati i dati persistenti. Il file dump.rdb viene utilizzato per il dump del database, mentre l'opzione appendonly yes abilita l'uso del file di append-only (appendonly.aof) per garantire la persistenza dei dati. Il nome di questo file è specificato da appendfilename "appendonly.aof".
 
-Infine, la configurazione dell'autenticazione è gestita dalle righe masterauth dHJlbjc5Cg== e requirepass dHJlbjc5Cg==, che specificano le password codificate in Base64 per l'autenticazione del master e per l'accesso ai comandi di Redis.
+Infine, la configurazione dell'autenticazione è gestita dalle righe masterauth ********* e requirepass *********, che specificano le password codificate in Base64 per l'autenticazione del master e per l'accesso ai comandi di Redis.
 
 **Applicazione Manifesto**
 ```bash
@@ -164,7 +164,7 @@ Identificato da apiVersion: v1 e kind: ConfigMap. La sezione metadata fornisce m
 
 Il cuore della configurazione si trova nella sezione data, dove viene definito il file sentinel.conf. Questo file specifica che il Sentinel di Redis deve ascoltare sulla porta 5000 e deve risolvere e annunciare i nomi degli host. Viene configurato per monitorare un master chiamato mymaster, identificato dall'indirizzo redis-0.redis.redis-ns.svc.cluster.local sulla porta 6379. Il parametro 2 indica che sono necessari almeno due Sentinel per confermare un fallimento del master.
 
-Altre configurazioni includono il tempo, in millisecondi, dopo il quale il Sentinel considererà il master non raggiungibile (5000 millisecondi), e il timeout per completare un failover (60000 millisecondi). Inoltre, il Sentinel è configurato per consentire una sola sincronizzazione parallela durante il failover. Infine, la riga sentinel auth-pass mymaster dHJlbjc5Cg== specifica la password, codificata in Base64, per l'autenticazione con il master mymaster.
+Altre configurazioni includono il tempo, in millisecondi, dopo il quale il Sentinel considererà il master non raggiungibile (5000 millisecondi), e il timeout per completare un failover (60000 millisecondi). Inoltre, il Sentinel è configurato per consentire una sola sincronizzazione parallela durante il failover. Infine, la riga sentinel auth-pass mymaster ********* specifica la password, codificata in Base64, per l'autenticazione con il master mymaster.
 
 **Applicazione Manifesto**
 ```bash

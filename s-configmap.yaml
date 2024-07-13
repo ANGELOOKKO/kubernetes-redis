@@ -12,7 +12,7 @@ data:
     sentinel down-after-milliseconds mymaster 5000
     sentinel failover-timeout mymaster 60000
     sentinel parallel-syncs mymaster 1
-    sentinel auth-pass mymaster dHJlbjc5Cg==
+    sentinel auth-pass mymaster *********
 
 
 #Sentinel rileva che il master non è disponibile.
